@@ -1,21 +1,29 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-{% for membro in membros %}
-<div class="col-lg-4 col-md-12 mb-4">
-<div class="card bg-transparent">
-    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-      <img src="{{membro.foto.url}}" class="img-fluid">
-      <a href="#></a>
-        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-      </a>
+  <h1 class="text-center">Membros</h1>
+  <div class="container">
+    <div class="row row-cols-3">
+      {% for membro in membros %}
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="card bg-transparent">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <div class="image-container">
+                <img src="{{ membro.foto.url }}" class="card-img-top member-image">
+              </div>
+              <a href="#"></a>
+              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><a href="#">{{ membro.nome }}</a></h5>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-    <div class="card-body">
-      <h5 class="card-title">{{membro.nome}}</h5>
-      <a href="#">Mais</a>
-    </div>
-    
   </div>
-</div>
-  {% endfor %}
+  
 {% endblock %}
+  

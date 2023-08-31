@@ -1,0 +1,12 @@
+.card {
+  
+    height: 3000px; /* Defina a altura fixa desejada */
+    overflow: hidden; 
+  }
+  
+.card .card-img-top{
+  width: 100%; /* Preenche a largura do card */
+  height: 100%; /* Preenche a altura do card */
+  object-fit: cover; 
+  display: block;
+}
