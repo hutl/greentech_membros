@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.hashers import make_password
 from datetime import datetime
 
 class Membro (models.Model):
@@ -17,7 +19,20 @@ class Membro (models.Model):
     def __str__(self):
         return self.nome
     
-class Usuario(models.Model):
+class Usuario(AbstractUser):
     nome = models.CharField(max_length=100)
     data_nasc = models.DateField(verbose_name='Data de Nascimento')
     email = models.EmailField()
+    password = models.CharField(max_length=50, default='')
+    USERNAME_FIELD = "email"
+
+    @staticmethod
+    def create_user(username,  password, **extra_fields):
+        extra_fields.setdefault('is_active', True)
+        if extra_fields.get('is_staff') is None:
+            extra_fields['is_staff'] = False
+        if extra_fields.get('is_superuser') is None:
+            extra_fields['is_superuser'] = False
+
+        password = make_password(password)
+        return Usuario._default_manager.create(username=username, password=password, **extra_fields)

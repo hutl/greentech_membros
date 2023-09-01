@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+ <a class="btn btn-secondary" href="{% url 'eu' %}">Criar user</a>
+
+{% if users %}
+<p>Existem {{qtd_usuario}} usuários</p>
+{% endif %}
+{% endblock %}
