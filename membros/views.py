@@ -14,9 +14,10 @@ class AltIndexView (ListView):
    template_name= "altindex.html"
    context_object_name = 'users'
 
-   def qtd_usuario(request):
-    qtd_usuario = Usuario.objects.count()
-    return qtd_usuario
+   def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['qtd_usuario'] = Usuario.objects.count()
+        return context
 
 class MembroView(DetailView):
     model = Membro
@@ -27,5 +28,5 @@ class WandinhaView(TemplateView):
 
 class CriarContaView(CreateView):
     form_class = UsuarioCreationForm
-    success_url = reverse_lazy('alt_index')  # Redirecionar para a página de login após o registro
+    success_url = reverse_lazy('altindex')  # Redirecionar para a página de login após o registro
     template_name = 'criar_user.html'  # O nome do template para exibir o formulário de registro

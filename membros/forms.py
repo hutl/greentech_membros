@@ -5,4 +5,4 @@ from .models import Usuario
 class UsuarioCreationForm(UserCreationForm):
     class Meta:
         model = Usuario
-        fields = ('username', 'email','data_nasc')
+        fields = ('nome','email','data_nasc')

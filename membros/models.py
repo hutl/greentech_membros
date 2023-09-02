@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from datetime import datetime
 
 class Membro (models.Model):
@@ -19,20 +18,36 @@ class Membro (models.Model):
     def __str__(self):
         return self.nome
     
-class Usuario(AbstractUser):
-    nome = models.CharField(max_length=100)
+class UsuarioManager(BaseUserManager):
+    def _create_user(self, nome, password, is_staff, is_superuser, **extra_fields):
+       
+        if not nome:
+            raise ValueError(_('O nome de jogador deve ser definido!'))
+        user = self.model(nome=nome, is_staff=is_staff, is_active=True, is_superuser=is_superuser, **extra_fields)
+        user.password = password
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+    def create_user(self, nome=None, password=None, **extra_fields):
+        return self._create_user(nome, password, False, False, **extra_fields)
+    def create_superuser(self, nome, password, **extra_fields):
+        user=self._create_user(nome, password, True, True, **extra_fields)
+        user.is_active=True
+        user.save(using=self._db)
+        return user
+    
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    nome = models.CharField(max_length=100, unique=True)
     data_nasc = models.DateField(verbose_name='Data de Nascimento')
     email = models.EmailField()
-    password = models.CharField(max_length=50, default='')
-    USERNAME_FIELD = "email"
+    password = models.CharField(max_length=128, null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    
+    objects = UsuarioManager()
 
-    @staticmethod
-    def create_user(username,  password, **extra_fields):
-        extra_fields.setdefault('is_active', True)
-        if extra_fields.get('is_staff') is None:
-            extra_fields['is_staff'] = False
-        if extra_fields.get('is_superuser') is None:
-            extra_fields['is_superuser'] = False
+    USERNAME_FIELD = 'nome'
+    REQUIRED_FIELDS = []
 
-        password = make_password(password)
-        return Usuario._default_manager.create(username=username, password=password, **extra_fields)
+    def __str__(self):
+        return self.nome
