@@ -5,6 +5,10 @@
  <a class="btn btn-secondary" href="{% url 'criaruser' %}">Criar user</a>
 
 {% if users %}
+{% if qtd_usuario > 1 %}
 <p>Existem {{qtd_usuario}} usuários</p>
+{% else %}
+<p>Existe {{qtd_usuario}} usuário</p>
+{% endif %}
 {% endif %}
 {% endblock %}

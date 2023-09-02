@@ -5,6 +5,11 @@
   }
   
 img{
-    width: 100%;
+    width: auto;
     max-height: 300px;
+    margin: 0 auto;
+}
+.btn{
+  display: flex;
+  justify-content: center;
 }

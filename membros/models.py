@@ -22,7 +22,7 @@ class UsuarioManager(BaseUserManager):
     def _create_user(self, nome, password, is_staff, is_superuser, **extra_fields):
        
         if not nome:
-            raise ValueError(_('O nome de jogador deve ser definido!'))
+            raise ValueError(('O nome de jogador deve ser definido!'))
         user = self.model(nome=nome, is_staff=is_staff, is_active=True, is_superuser=is_superuser, **extra_fields)
         user.password = password
         user.set_password(password)
@@ -38,7 +38,7 @@ class UsuarioManager(BaseUserManager):
     
 class Usuario(AbstractBaseUser, PermissionsMixin):
     nome = models.CharField(max_length=100, unique=True)
-    data_nasc = models.DateField(verbose_name='Data de Nascimento')
+    data_nasc = models.DateField(verbose_name='Data de Nascimento', null=True, blank=True)
     email = models.EmailField()
     password = models.CharField(max_length=128, null=True, blank=True)
     is_active = models.BooleanField(default=True)
