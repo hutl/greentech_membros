@@ -1,0 +1,15 @@
+.card {
+    margin-bottom: 15px;
+    height: 300px; /* Defina a altura fixa desejada */
+    overflow: hidden; 
+  }
+  
+img{
+    width: auto;
+    max-height: 300px;
+    margin: 0 auto;
+}
+.btn{
+  display: flex;
+  justify-content: center;
+}
