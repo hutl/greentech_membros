@@ -1,6 +1,6 @@
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, TemplateView, CreateView
+from django.views.generic import ListView, DetailView, TemplateView
 from .models import *
 
 class IndexView (ListView):
@@ -15,4 +15,3 @@ class MembroView(DetailView):
 
 class WandinhaView(TemplateView):
     template_name = 'segredo.html'
-

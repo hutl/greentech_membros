@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import *
 
+app_name = 'membros'
 urlpatterns = [
     path('',IndexView.as_view(), name="index"),
     path('segredo/',WandinhaView.as_view(),name="eu"),

@@ -16,7 +16,7 @@
               </a>
             </div>
             <div class="card-body">
-              <h5 class="card-title"><a href="{% url 'detalhe' membro.pk %}">{{ membro.nome }}</a></h5>
+              <h5 class="card-title"><a href="{% url 'membros:detalhe' membro.pk %}">{{ membro.nome }}</a></h5>
             </div>
           </div>
         </div>
@@ -31,12 +31,11 @@
             </a>
           </div>
           <div class="card-body">
-            <h5 class="card-title"><a href="{% url 'eu' %}">Wandinha</a></h5>
+            <h5 class="card-title"><a href="{% url 'membros:eu' %}">Wandinha</a></h5>
           </div>
         </div>
       </div>
     </div>
- 
   </div>
   
 {% endblock %}

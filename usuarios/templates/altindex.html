@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
- <a class="btn btn-secondary" href="{% url 'criaruser' %}">Criar user</a>
+ <a class="btn btn-secondary" href="{% url 'usuarios:criar' %}">Criar user</a>
 
 {% if users %}
 {% if qtd_usuario > 1 %}
@@ -11,4 +11,9 @@
 <p>Existe {{qtd_usuario}} usuário</p>
 {% endif %}
 {% endif %}
+
+{% for user in users %}
+<p>{{user.nome}}</p>
+<a href="{% url 'usuarios:deletar'  user.pk%}">Deletar</a>
+{% endfor %}
 {% endblock %}

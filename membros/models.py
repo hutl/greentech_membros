@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.validators import MinValueValidator
 from datetime import datetime
 
 class Membro (models.Model):
@@ -7,9 +6,8 @@ class Membro (models.Model):
     email = models.EmailField()
     data_nasc = models.DateField(verbose_name='Data de Nascimento')
     curso = models.CharField(max_length=200, default='CST em Análise e Desenvolvimento de Sistemas')
-    media_curso = models.DecimalField(max_digits=3, decimal_places=2, validators=[MinValueValidator(0.0)])
+    media_curso = models.DecimalField(max_digits=3, decimal_places=2)
     foto = models.ImageField(upload_to='uploads/',default='')
-    teste = models.PositiveIntegerField()
 
     def calcular_idade(self):
         hoje = datetime.now().date()
